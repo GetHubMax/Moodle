@@ -894,6 +894,10 @@ class gradingform_guide_instance extends gradingform_instance {
     public function get_grade() {
         $grade = $this->get_guide_filling();
 
+        if($grade<0){
+            return 0;
+        }
+
         if (!($scores = $this->get_controller()->get_min_max_score()) || $scores['maxscore'] <= $scores['minscore']) {
             return -1;
         }
@@ -911,7 +915,7 @@ class gradingform_guide_instance extends gradingform_instance {
             $curscore += $record['score'];
         }
         $gradeoffset = ($curscore-$scores['minscore'])/($scores['maxscore']-$scores['minscore'])*
-            ($maxgrade-$mingrade);
+           ($maxgrade-$mingrade);
         if ($this->get_controller()->get_allow_grade_decimals()) {
             return $gradeoffset + $mingrade;
         }
