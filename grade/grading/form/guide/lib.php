@@ -893,7 +893,7 @@ class gradingform_guide_instance extends gradingform_instance {
      */
     public function get_grade() {
         $grade = $this->get_guide_filling();
-
+        //If the grade is under 0 the student isn't graded yet.
         if($grade<0){
             return 0;
         }
